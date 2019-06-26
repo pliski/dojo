@@ -1,0 +1,8 @@
+graph LR;
+  CLI ==> Runner:runnerA;
+  CLI ==> Runner:runnerB;
+  CLI ==> RaceControl:rc;
+
+  Runner --> averageSpeed
+  RaceControl --> getGap
+  RaceControl --> addRunner?

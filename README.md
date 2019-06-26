@@ -1,2 +1,3 @@
-# dojo
-code dojo
+# Personal code dojo
+
+Some kata from codewars.

@@ -1,4 +1,7 @@
+type raceParameter = [string, number];
+
 const exit = process.exit;
+
 function calculateHours(speedA: number, speedB: number, distance: number) {
   return Math.round(distance / (speedA - speedB));
 }
@@ -9,16 +12,28 @@ export function race(speedA: number, speedB: number, distance: number) {
 }
 
 function sanitize(speedA: number, speedB: number, distance: number) {
-  if (typeof speedA !== 'number') {
-    console.error('SpeedA is not a number');
-    exit(1);
+  const aParameters: raceParameter[] = [
+    ['SpeedA', speedA],
+    ['SpeedB', speedB],
+    ['Distance', distance],
+  ];
+
+  aParameters.forEach((t: raceParameter) => {
+    sanitizeString(t[0], t[1]);
+    sanitizeTooLow(t[0], t[1]);
+  });
+}
+
+function sanitizeString(name: string, value: number) {
+  if (typeof value !== 'number') {
+    throw new Error(`${name} is not a number`);
   }
-  if (typeof speedB !== 'number') {
-    console.error('SpeedB is not a number');
-    exit(1);
-  }
-  if (typeof distance !== 'number') {
-    console.error('Distance is not a number');
-    exit(1);
+}
+
+function sanitizeTooLow(name: string, value: number) {
+  console.log('saniteTooLow', name, value);
+  console.log('type', typeof value);
+  if (value < 0) {
+    throw new Error(`${name} is too low`);
   }
 }

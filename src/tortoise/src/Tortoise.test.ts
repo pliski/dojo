@@ -5,9 +5,12 @@ describe('Tortoise class tests', () => {
     expect(tortoise).toBeInstanceOf(Tortoise);
   });
 
-  test('should go for 170', async () => {
+  test('should return the result in hour when speedA > speedB', async () => {
     const tortoise = new Tortoise();
-    const gone = tortoise.go();
-    expect(gone).toStrictEqual(170);
+    const speedA = 850;
+    const speedB = 720;
+    const gap = 70;
+    const result = tortoise.race(speedA, speedB, gap);
+    expect(result).toStrictEqual(0.5);
   });
 });

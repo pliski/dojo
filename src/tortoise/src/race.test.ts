@@ -1,12 +1,11 @@
 import { race } from '.';
 describe('race tests', () => {
   test('should return the result in hour when leader is slower than trailer', () => {
-    const letsRace = race;
     const leaderSpeed = 720;
     const trailerSpeed = 850;
     const gap = 70;
-    const result = letsRace(leaderSpeed, trailerSpeed, gap);
-    expect(result).toStrictEqual(1);
+    const result = race(leaderSpeed, trailerSpeed, gap);
+    expect(result).toStrictEqual('0 32 18');
   });
   test('should return null when leader is faster then trailer', () => {
     const letsRace = race;
@@ -19,7 +18,7 @@ describe('race tests', () => {
   test('should fail is input is not a number', () => {
     interface MockRaceInterface {
       // tslint:disable-next-line: no-any
-      (_: any, __: number, ___: number): number;
+      (_: any, __: number, ___: number): string;
     }
 
     const letsRace = race as MockRaceInterface;
@@ -33,8 +32,8 @@ describe('race tests', () => {
   });
 
   test('should fail is input is too low', () => {
-    const leaderSpeed = 850;
-    const trailerSpeed = -1;
+    const leaderSpeed = -1;
+    const trailerSpeed = 100;
     const gap = 70;
 
     expect(() => {

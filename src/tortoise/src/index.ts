@@ -1,15 +1,31 @@
+import ms = require('ms');
+import moment = require('moment');
+
 type raceParameter = [string, number];
 
 const exit = process.exit;
 
-function calculateHours(leaderSpeed: number, trailerSpeed: number, distance: number) {
-  return Math.round(distance / (trailerSpeed - leaderSpeed));
+function calculateMilliseconds(
+  leaderSpeed: number,
+  trailerSpeed: number,
+  distance: number
+): number {
+  return (distance / (trailerSpeed - leaderSpeed)) * 3600000;
 }
 
-export function race(leaderSpeed: number, trailerSpeed: number, distance: number) {
+function timeFormat(gapMilliseconds: number): string {
+  return moment.utc(gapMilliseconds).format('H mm ss');
+}
+
+export function race(
+  leaderSpeed: number,
+  trailerSpeed: number,
+  distance: number
+) {
   sanitize(leaderSpeed, trailerSpeed, distance);
   if (!checkOrder(leaderSpeed, trailerSpeed)) return null;
-  return calculateHours(leaderSpeed, trailerSpeed, distance);
+  const msGap = calculateMilliseconds(leaderSpeed, trailerSpeed, distance);
+  return timeFormat(msGap);
 }
 
 function checkOrder(leaderSpeed: number, trailerSpeed: number): boolean {

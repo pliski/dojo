@@ -28,8 +28,12 @@
     "@types/chalk": "^2.2.0",
     "@types/figlet": "^1.2.0",
     "@types/jest": "^24.0.15",
+    "@types/moment": "^2.13.0",
+    "@types/ms": "^0.7.30",
     "figlet": "^1.2.3",
     "jest": "^24.8.0",
+    "moment": "^2.24.0",
+    "ms": "^2.1.2",
     "ts-jest": "^24.0.2"
   }
 }
